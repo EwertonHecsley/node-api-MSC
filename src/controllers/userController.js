@@ -42,4 +42,14 @@ const updateUSer = async (req, res) => {
     };
 };
 
-module.exports = { getAllUser, storeUser, findById, updateUSer }
+const destroyUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await userService.destroyUser(id);
+        return res.status(200).json(result);
+    } catch (error) {
+        return res.status(500).json({ mensagem: 'Erro interno no servidor', erro: error.message });
+    };
+};
+
+module.exports = { getAllUser, storeUser, findById, updateUSer, destroyUser }

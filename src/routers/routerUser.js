@@ -7,6 +7,7 @@ const schema = require('../schemas/userSchema');
 rota.post('/user', validateBody(schema), userController.storeUser);
 rota.put('/user/:id', validateBody(schema), userController.updateUSer);
 rota.get('/user/:id', userController.findById);
+rota.delete('/user/:id', userController.destroyUser);
 rota.get('/user', userController.getAllUser);
 
 module.exports = rota;

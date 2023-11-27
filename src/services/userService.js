@@ -40,9 +40,16 @@ const updateUser = async ({ id, nome, email, senha }) => {
     return resultUpdated;
 };
 
+const destroyUser = async (id) => {
+    const user = await userModel.findById(id);
+    if (!user) return { mensagem: 'Usuário não encontrado para o ID selecionado.' };
+    await userModel.destroyUser(id);
+}
+
 module.exports = {
     getAllUser,
     storeUser,
     findById,
-    updateUser
+    updateUser,
+    destroyUser
 }

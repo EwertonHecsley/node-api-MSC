@@ -28,6 +28,10 @@ const updateUser = async ({ id, nome, email, senha }) => {
         .where({ id })
         .returning(['id', 'nome', 'email']);
     return result[0];
+};
+
+const destroyUser = async (id) => {
+    await knex('usuarios').where({ id }).del();
 }
 
 module.exports = {
@@ -35,5 +39,6 @@ module.exports = {
     storeUser,
     findById,
     findUserByEmail,
-    updateUser
+    updateUser,
+    destroyUser
 }
