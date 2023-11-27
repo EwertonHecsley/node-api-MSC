@@ -5,8 +5,9 @@ const rotas = require('./routers');
 
 app.use(express.json());
 
-app.use('/user', rotas.userRouter);
-app.use('/user', rotas.storeRouter);
-app.use('/user', rotas.findRouter);
+app.use('/', rotas.storeRouter);
+app.use('/', rotas.findRouter);
+app.use('/', rotas.updateRouter);
+app.use('/', rotas.userRouter);
 
 module.exports = app;

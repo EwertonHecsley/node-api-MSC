@@ -27,9 +27,19 @@ const findById = async (req, res) => {
         const result = await userService.findById(id);
         return res.status(200).json(result)
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno no servidor', erro: error.message });
     };
-}
+};
 
-module.exports = { getAllUser, storeUser, findById }
+const updateUSer = async (req, res) => {
+    const { id } = req.params;
+    const { nome, email, senha } = req.body;
+    try {
+        await userService.updateUser({ id, nome, email, senha });
+        return res.status(200).json({ mensagem: 'Usuário atualizado com sucesso.' });
+    } catch (error) {
+        return res.status(500).json({ mensagem: 'Erro interno no servidor', erro: error.message });
+    };
+};
+
+module.exports = { getAllUser, storeUser, findById, updateUSer }

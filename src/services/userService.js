@@ -30,8 +30,19 @@ const findById = async (id) => {
     return resultFormated;
 };
 
+const updateUser = async ({ id, nome, email, senha }) => {
+    const result = await userModel.findById(id);
+    if (!result) return { mensagem: 'Usuário não encontrado para o ID selecionado.' };
+    const resultEmail = await userModel.findUserByEmail(email);
+    if (resultEmail) return { mensagem: 'Email já cadastrado.' };
+    const passwordCrypted = await bcrypt.hash(senha, 8);
+    const resultUpdated = await userModel.updateUser({ id, nome, email, senha: passwordCrypted });
+    return resultUpdated;
+};
+
 module.exports = {
     getAllUser,
     storeUser,
-    findById
+    findById,
+    updateUser
 }

@@ -20,11 +20,20 @@ const findById = async (id) => {
 const findUserByEmail = async (email) => {
     const result = await knex('usuarios').where({ email }).first();
     return result;
+};
+
+const updateUser = async ({ id, nome, email, senha }) => {
+    const result = await knex('usuarios')
+        .update({ nome, email, senha })
+        .where({ id })
+        .returning(['id', 'nome', 'email']);
+    return result[0];
 }
 
 module.exports = {
     getAllUser,
     storeUser,
     findById,
-    findUserByEmail
+    findUserByEmail,
+    updateUser
 }

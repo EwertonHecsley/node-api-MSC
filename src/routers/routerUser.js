@@ -4,8 +4,9 @@ const userController = require('../controllers/userController');
 const { validateBody } = require('../middlewares/validateBody');
 const schema = require('../schemas/userSchema');
 
-rota.get('/', userController.getAllUser);
-rota.get('/:id', userController.findById);
-rota.post('/', validateBody(schema), userController.storeUser);
+rota.post('/user', validateBody(schema), userController.storeUser);
+rota.put('/user/:id', validateBody(schema), userController.updateUSer);
+rota.get('/user/:id', userController.findById);
+rota.get('/user', userController.getAllUser);
 
 module.exports = rota;
